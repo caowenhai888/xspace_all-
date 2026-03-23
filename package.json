@@ -38,6 +38,7 @@
     "eslint": "9.39.1",
     "eslint-config-next": "16.0.8",
     "firebase-tools": "^15.0.0",
+    "postcss-preset-env": "^11.2.0",
     "prisma": "^6.19.2",
     "tailwindcss": "4.1.11",
     "tsx": "^4.19.2",
@@ -46,5 +47,11 @@
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
-  }
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "Safari >= 14"
+  ]
 }
