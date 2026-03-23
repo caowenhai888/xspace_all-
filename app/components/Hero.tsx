@@ -16,7 +16,7 @@ const Hero = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       // 严禁使用 import，统一使用绝对路径
-      setVideoSrc("/assets/d8f67dd2d245dd09a9544de5da83ea3f.mp4");
+      setVideoSrc("/assets/banner.mp4");
     }, 1500);
 
     return () => clearTimeout(timer);

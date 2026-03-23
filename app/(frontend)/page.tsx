@@ -31,7 +31,7 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const productConfigs = [
-    { key: 'xego', video: '/assets/w1.mp4', poster: 'https://picsum.photos/seed/ego/1200/600', data: t.home.products.xego },
+    { key: 'xego', video: '/assets/geo.mp4', poster: 'https://picsum.photos/seed/ego/1200/600', data: t.home.products.xego },
     { key: 'luminis', video: '/assets/s12.mp4', poster: 'https://picsum.photos/seed/lum/1200/600', data: t.home.products.luminis },
     { key: 'xone', video: '/assets/x_one.mp4', poster: 'https://picsum.photos/seed/xone/1200/600', data: t.home.products.xone },
   ];
