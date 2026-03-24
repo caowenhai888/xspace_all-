@@ -8,7 +8,7 @@ import Hero from '@/app/components/Hero';
 import { useLanguage } from '@/app/context/LanguageContext';
 
 // 产品模块视频背景
-const VideoBackground = ({ src, poster }: { src: string; poster: string }) => {
+const VideoBackground = ({ src, poster }: { src: string; poster?: string }) => {
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
       <video
@@ -31,9 +31,9 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const productConfigs = [
-    { key: 'xego', video: '/assets/geo.mp4', poster: 'https://picsum.photos/seed/ego/1200/600', data: t.home.products.xego },
-    { key: 'luminis', video: '/assets/s12.mp4', poster: 'https://picsum.photos/seed/lum/1200/600', data: t.home.products.luminis },
-    { key: 'xone', video: '/assets/x_one.mp4', poster: 'https://picsum.photos/seed/xone/1200/600', data: t.home.products.xone },
+    { key: 'xego', video: '/assets/geo.mp4', data: t.home.products.xego },
+    { key: 'luminis', video: '/assets/s12.mp4', data: t.home.products.luminis },
+    { key: 'xone', video: '/assets/x_one.mp4', data: t.home.products.xone },
   ];
 
   // 统一的播放/暂停逻辑
@@ -73,7 +73,7 @@ export default function Home() {
                 onClick={() => router.push('/technology')}
                 className="relative h-[400px] md:h-[565px] rounded-[18px] overflow-hidden shadow-xl bg-gray-900 group cursor-pointer"
               >
-                <VideoBackground src={config.video} poster={config.poster} />
+                <VideoBackground src={config.video}  />
                 <div className="relative z-10 p-8 md:p-12 h-full flex flex-col justify-center text-left">
                   <h3 className="text-2xl md:text-5xl font-bold text-white mb-4 md:mb-6">{config.data.title}</h3>
                   <p className="text-white/90 text-sm md:text-lg max-w-xl mb-6 md:mb-8">{config.data.desc}</p>
