@@ -198,7 +198,7 @@ const Technology = () => {
       </section>
 
       {/* Section 3: X-One */}
-      <section className="container-custom pb-16 md:pb-32 text-center text-black px-4 md:px-0">
+      <section className="container-custom pb-2  text-center text-black px-4 md:px-0">
         <h2 className="mb-6 md:mb-8 text-2xl md:text-[56px] font-bold leading-[1.1]">{t.technology.xone.title}</h2>
         <p className="text-base md:text-[24px] mb-10 md:mb-12 max-w-4xl mx-auto text-gray-800">{t.technology.xone.desc}</p>
         <div className="relative w-full aspect-[16/9] md:aspect-[1140/641] rounded-[12px] md:rounded-[18px] overflow-hidden shadow-2xl bg-black group mx-auto">
@@ -221,6 +221,15 @@ const Technology = () => {
               </div>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Technology stack footer text */}
+      <section className="px-4 md:px-0 pb-12 md:pb-16">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+            {t.technology.sectionFooter}
+          </p>
         </div>
       </section>
     </motion.div>
