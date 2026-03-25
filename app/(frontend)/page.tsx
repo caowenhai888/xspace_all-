@@ -1,10 +1,9 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import { motion } from 'motion/react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import Hero from '@/app/components/Hero';
+import Partners from '@/app/components/Partners';
 import { useLanguage } from '@/app/context/LanguageContext';
 
 // 产品模块视频背景
@@ -148,8 +147,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 7. Partners Section */}
-      {/* ... */}
+      <Partners />
     </div>
   );
 }

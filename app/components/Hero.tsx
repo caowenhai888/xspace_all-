@@ -10,20 +10,14 @@ const Hero = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [showPlayButton, setShowPlayButton] = useState(false);
   const { t } = useLanguage();
-  // 1.5s 延迟加载视频，防止抢占首屏带宽
-  const [videoSrc, setVideoSrc] = useState("");
+
+  // --- 优化点 1：不再使用 1.5s 延迟，直接初始化路径 ---
+  // 这样浏览器解析到 HTML 时就能立刻去抓取 Poster 图片，实现秒开
+  const videoSrc = "/assets/banner.mp4";
+  const posterSrc = "/assets/banner-poster.webp";
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      // 严禁使用 import，统一使用绝对路径
-      setVideoSrc("/assets/banner.mp4");
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    if (!videoSrc || !videoRef.current) return;
+    if (!videoRef.current) return;
 
     const video = videoRef.current;
     
@@ -31,6 +25,7 @@ const Hero = () => {
       if (!video) return;
       video.muted = true;
       video.defaultMuted = true;
+      
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise
@@ -54,6 +49,7 @@ const Hero = () => {
       document.addEventListener("WeixinJSBridgeReady", handleWechatReady, false);
     }
 
+    // 尝试播放
     attemptPlay();
 
     const handlePause = () => { if (!video.ended) setShowPlayButton(true); };
@@ -67,7 +63,7 @@ const Hero = () => {
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('play', handlePlay);
     };
-  }, [videoSrc]);
+  }, []); // 路径固定了，依赖项可以为空
 
   const handleManualPlay = () => {
     if (videoRef.current) videoRef.current.play();
@@ -77,19 +73,18 @@ const Hero = () => {
     <section className="relative h-screen min-h-[700px] flex flex-col items-center justify-center overflow-hidden bg-black text-white px-6">
       {/* Background Video Layer */}
       <div className="absolute inset-0 z-0 bg-[#0a0a0a]">
-        {videoSrc && (
-          <video
-            ref={videoRef}
-            src={videoSrc}
-            muted
-            loop
-            playsInline
-            preload="none" // 物理隔离，不准预加载流量
-            className={`w-full h-full object-cover transition-opacity duration-1000 ${
-              videoSrc ? 'opacity-60' : 'opacity-0'
-            }`}
-          />
-        )}
+        {/* --- 优化点 2：preload 改为 metadata --- */}
+        {/* metadata 会让浏览器立刻下载封面和视频头信息，但不阻塞主线程，体验最平衡 */}
+        <video
+          ref={videoRef}
+          src={videoSrc}
+          poster={posterSrc}
+          muted
+          loop
+          playsInline
+          preload="metadata" 
+          className="w-full h-full object-cover transition-opacity duration-1000 opacity-60"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/90" />
       </div>
 
@@ -114,7 +109,7 @@ const Hero = () => {
         )}
       </AnimatePresence>
 
-      {/* Main UI Content - 文字内容由 SSR 渲染 */}
+      {/* Main UI Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto pt-20 md:pt-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

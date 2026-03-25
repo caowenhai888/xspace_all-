@@ -68,10 +68,10 @@ export const translations = {
         names: {
           alibaba: 'Alibaba',
           bytedance: 'ByteDance',
-          tencent: 'Tencent',
           nvidia: 'NVIDIA',
+          shanghai: 'Shanghai Jiao Tong University',
           tsinghua: 'Tsinghua University',
-          hku: 'HKU',
+          hku: 'The University of Hong Kong',
         }
       },
       common: {
@@ -222,8 +222,8 @@ export const translations = {
         names: {
           alibaba: '阿里巴巴',
           bytedance: '字节跳动',
-          tencent: '腾讯',
           nvidia: '英伟达',
+          shanghai: '上海交通大学',
           tsinghua: '清华大学',
           hku: '香港大学',
         }
